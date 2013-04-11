@@ -1,0 +1,72 @@
+div.random {
+  background-color: pink;
+}
+
+.word circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.word circle:hover {
+  fill: #f0f0f0;
+}
+
+.word {
+  font: 20px sans-serif;
+}
+
+input {
+  position: absolute;
+}
+
+.search_btn{
+  position: absolute;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.root.id_1 circle{
+  stroke: #d04255;
+}
+
+.root.id_2 circle{
+  stroke: #e06a3b;
+}
+
+.root.id_3 circle{
+  stroke: #edab0e;
+}
+
+.root.id_4 circle{
+  stroke: #b2cf3e;
+}
+
+.root.id_5 circle{
+  stroke: #19935c;
+}
+
+.root.id_6 circle{
+  stroke: #45a1cf;
+}
+
+.root.id_7 circle{
+  stroke: #3261ab;
+}
+
+.root.id_8 circle{
+  stroke: #5d639e;
+}
+
+.root.id_9 circle{
+  stroke: #8858aa;
+}
+
+.root.id_10 circle{
+  stroke: #ce579b;
+}
+

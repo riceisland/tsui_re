@@ -1,0 +1,11 @@
+%div{:id => "content"}
+	%form{:action => "/login", :method => "POST"}
+		%fieldset
+			%label Name
+			%input{:type => "text", :name =>"name"}
+		%fieldset
+			%label Password
+			%input{:type => "password", :name =>"password"}
+		%input{:type => "submit", :value => "Login", :class => "btn"}
+	%a{:href => "/register"} Register
+	
