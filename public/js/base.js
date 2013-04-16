@@ -71,7 +71,8 @@ function relate_draw(dataset){
 	console.log(dataset.word_id)
 	console.log(dataset.children[0].direction);
 	$("svg").remove();
-	$('#myModal').remove(); 
+	$('#myModal').remove();
+    $('form').remove(); 
 	//alert(typeof dataset);
 	
 	var diameter = 700;
