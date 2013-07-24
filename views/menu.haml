@@ -1,0 +1,13 @@
+%select{:id => "cd-dropdown", :class => "cd-select", :name => "cd-dropdown"}
+	%option{:value => "-1", :selected => true, :id => "status"}= "メニュー"
+	-if @username
+		%option{:value => "1", :id => "fav"}お気に入りを表示
+		%option{:value => "2", :id => "history"}履歴を表示
+		%option{:value => "3", :id => "search"}語を検索する
+		%option{:value => "4", :id => "rand"}ランダムに選択
+		%option{:value => "5", :id => "logout"}ログアウトする
+	-else
+		%option{:value => "3", :id => "search"}語を検索する
+		%option{:value => "4", :id => "rand"}ランダムに選択
+		%option{:value => "6", :id => "register"}ユーザ登録する
+		%option{:value => "7", :id => "login"}ログインする

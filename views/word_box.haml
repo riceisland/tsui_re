@@ -1,0 +1,17 @@
+%div{:class => "word relate", :id => @content[:word_id]}
+	%p{:style => "font-size:" + @content[:size].to_s + "px;", :class => "box_str"}= @content[:direction]
+	%div{:class => "backdrop", :id => "backdrop_" + @content[:word_id]}
+		- if @content[:fav_icon]
+			%div{:class => "backdrop_fav"}
+				-if @content[:fav_icon] == "icon-heart-1"
+					%span{:class =>  @content[:fav_icon] + " backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";", :id => "favbd_" +  @content[:word_id] }
+					%p{:class => "backdrop_content fav_msg1", :style => "line-height:" + @backdrop_height + ";", :id => "favbdmsg_" +  @content[:word_id] }お気に入りを解除
+				-else
+					%span{:class =>  @content[:fav_icon] + " backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";", :id => "favbd_" +  @content[:word_id]}
+					%p{:class => "backdrop_content fav_msg2", :style => "line-height:" + @backdrop_height + ";", :id => "favbdmsg_" +  @content[:word_id] }お気に入りに追加
+		%div{:class => "backdrop_semantic"}
+			%span{:class => "icon-book-alt2 backdrop_content", :'aria-hidden' => "true",:style => "line-height:" + @backdrop_height + ";"}
+			%p{:class => "backdrop_content semantic_msg", :style => "line-height:" + @backdrop_height + ";"}語義を見る
+		%div{:class => "backdrop_relate"}
+			%span{:class => "icon-fullscreen backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";"}
+			%a{:href => "word?word_id=" + @content[:word_id] + "&relation_id=" + @content[:relation_id].to_s, :class => "backdrop_content", :style => "line-height:" + @backdrop_height + ";"}関係ある語を見る		

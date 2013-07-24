@@ -4,14 +4,24 @@
 	%head
 		%title= @title
 		%meta{:"http-equiv"=>"Content-Type", :content=>"text/html", :charset=>"utf-8"}
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/bootstrap.css"} 
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/img_font_style.css"}  
 		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/style.css"} 
-		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/bootstrap.css"}    
-		%script{:type => 'text/javascript', :src => "./js/d3/d3.v3.js"}
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/menu.css"}   
 		%script{:type => 'text/javascript', :src => "./js/jquery-1.8.3.min.js"}
+		%script{:type => 'text/javascript', :src => "./js/jquery.flip.js"}
+		%script{:type => 'text/javascript', :src => "./js/modernizr.custom.63321.js"}
 		%script{:type => 'text/javascript', :src => "./js/base.js"}
+		%script{:type => 'text/javascript', :src => "./js/jquery.dropdown.js"}
 	%body
-		%div{:class => "topbox"}
-		%div{:id => "container"}
-			!= yield
-		%script{:type => "text/javascript", :src =>"./js/bootstrap/bootstrap-alert.js"}
+		%div{:class => "row"}
+			%div{:class => "span4"}
+				%div{:class => "menu"}
+					= haml :menu
+			= haml :searchmodal
+			%div{:class => "span8"}
+				%div{:id => "container"}
+					!= yield
 		%script{:type => "text/javascript", :src =>"./js/bootstrap/bootstrap-modal.js"}
+		%script{:type => "text/javascript", :src =>"./js/bootstrap/bootstrap-tab.js"}
+		

@@ -27,6 +27,301 @@ $(document).ready(function(){
     return false;
   });
   
+  $(".center_data").click(function(){
+  	//alert("a");
+  	$('#myModal').modal();
+  })
+  
+  //large_width = $("button.css_btn_class_green").outerWidth();
+  //alert(large_width)
+  //$("button.css_btn_class").css("width", large_width + "px");
+  //$(".alert").css("width", large_width + "px");
+  $("button.css_btn_class").css("width", "420px");
+  $("button.css_btn_alert").css("width", "420px");
+  
+  $(document).on("click", "button.css_btn_class_green", function(){
+  	location.href = ("/main");
+  });
+  
+  $(document).on("click", "li#search", function(){
+  	$("#searchModal").modal();
+  })
+  
+  $( '#cd-dropdown' ).dropdown();
+  
+  $(document).on("click", "li#fav", function(){
+  	location.href = ("./fav_list?page=1");
+  })
+  
+  $(document).on("click", "li#logout", function(){
+  	location.href = ("./logout");
+  })
+  
+  $(document).on("click", "li#login", function(){
+  	location.href = ("./?status=login");
+  })
+  
+  $(document).on("click", "li#register", function(){
+  	location.href = ("./?status=register");
+  })
+  
+  $(document).on("click", "li#rand", function(){
+  	location.href = ("./main");
+  })
+  
+  $(document).on("click", "div.backdrop_fav > span.icon-heart-2, div.backdrop_fav > p.fav_msg2", function(){
+  	id = $(this).attr("id");
+  	send_id = id.split("_");
+  	send_data = {id : send_id[1]}
+  	
+  	span_id = "span#favbd_" + send_id[1]
+  	p_id = "p#favbdmsg_" + send_id[1]
+  	
+  	$.ajax({
+      url: "/fav_add",
+      type: 'POST',
+      timeout: 1000,
+      data: send_data,
+      error: function(){alert('ERROR');},
+      success: function(str){
+      	//alert($(this).attr("class"));
+      	$(span_id).removeClass("icon-heart-2");
+  		$(span_id).addClass("icon-heart-1");
+  		$(p_id).html("お気に入りを解除");
+  		$(p_id).removeClass("fav_msg2");
+  		$(p_id).addClass("fav_msg1");
+      }
+    });
+    return false;
+  	
+  })
+
+  $(document).on("click", "div.modal-header > span.icon-heart-2", function(){
+  	id = $(this).attr("id");
+  	send_id = id.split("_");
+  	send_data = {id : send_id[1]}
+  	
+  	span_id = "span#modalfav_" + send_id[1]
+  	//alert(span_id)
+    	
+  	$.ajax({
+      url: "/fav_add",
+      type: 'POST',
+      timeout: 1000,
+      data: send_data,
+      error: function(){alert('ERROR');},
+      success: function(str){
+      	//alert($(this).attr("class"));
+      	$(span_id).removeClass("icon-heart-2");
+  		$(span_id).addClass("icon-heart-1");
+      }
+    });
+    return false;
+  	
+  })
+  
+  $(document).on("click", "div.backdrop_fav > span.icon-heart-1, div.backdrop_fav > p.fav_msg1", function(){
+  	id = $(this).attr("id");
+  	send_id = id.split("_");
+  	send_data = {id : send_id[1]}
+  	
+  	span_id = "span#favbd_" + send_id[1]
+  	p_id = "p#favbdmsg_" + send_id[1]
+  	
+  	$.ajax({
+      url: "/fav_remove",
+      type: 'POST',
+      timeout: 1000,
+      data: send_data,
+      error: function(){alert('ERROR');},
+      success: function(str){
+	  	$(span_id).removeClass("icon-heart-1");
+  		$(span_id).addClass("icon-heart-2");
+  		$(p_id).html("お気に入りに追加");
+  		$(p_id).removeClass("fav_msg1");
+  		$(p_id).addClass("fav_msg2");
+      }
+    });
+    return false;
+  })
+  
+  $(document).on("click", "div.modal-header > span.icon-heart-1", function(){
+  	id = $(this).attr("id");
+  	send_id = id.split("_");
+  	send_data = {id : send_id[1]}
+  	
+  	span_id = "span#modalfav_" + send_id[1]
+  	
+  	$.ajax({
+      url: "/fav_remove",
+      type: 'POST',
+      timeout: 1000,
+      data: send_data,
+      error: function(){alert('ERROR');},
+      success: function(str){
+	  	$(span_id).removeClass("icon-heart-1");
+  		$(span_id).addClass("icon-heart-2");
+      }
+    });
+    return false;
+  })
+  
+  $(document).on("click", "div.backdrop_semantic > span.icon-book-alt2, div.backdrop_semantic > p.semantic_msg", function(){
+  	//str = $(this).closest("div.word > p.box_str").text();
+  	oldstr = $(this).closest("div.word").children("p").text();
+  	str = oldstr.replace(/（.*）/, "")
+  	word_id = $(this).closest("div.word").attr("id");
+  	bd_id = "#favbd_" + word_id
+  	//alert(str);
+  	
+  	relate_href = $(this).closest("div").next("div").children("a").attr("href");
+  	//alert(relate_href);
+  	relate_id = relate_href.split("=")[2]
+  	//alert(relate_id);
+  	
+  	var relate_caption = "";
+  	
+  	switch(relate_id){
+  		case "1":
+  			relate_caption = "同音異義語";
+  			break;
+  		case "2":
+  			relate_caption = "同じ漢字を含む";
+  			break;
+  		case "3":
+  			relate_caption = "同じ音を含む";
+  			break;
+  		case "4":
+  			relate_caption = "同じ分類";
+  			break;  		
+  		case "5":
+  			relate_caption = "反義語";
+  			break;
+  		case "6":
+   			relate_caption = "故事ことわざに共起";
+  			break;
+  		case "7":
+  			relate_caption = "有名フレーズに共起";
+  			break;
+  		case "8":
+  			relate_caption = "なし（履歴より）";
+  			break;
+  		case "9":
+  			relate_caption = "なし（ランダム選択）";
+  			break;  		
+  		case "10":
+  			relate_caption = "なし（検索機能の利用）";
+  			break;  		
+  		case "11":
+  			relate_caption = "なし（お気に入りより）";
+  			break;
+  	}
+  	
+  	
+  	if ($("span.fav_icon") != null){
+  	  
+  	  default_classes = $(bd_id).attr("class");
+  	  default_class = default_classes.split(" ")[0]
+  	  //alert(default_class);
+  	  
+  	  $("span.fav_icon").attr("id", "modalfav_" + word_id)
+  	  
+  	  if(default_class == "icon-heart-2"){
+  	  	
+  	  	$("span.fav_icon").addClass("icon-heart-2");
+  	  	
+  	  }
+  	  else{
+  	  	
+  	  	$("span.fav_icon").addClass("icon-heart-1");
+  	  	
+  	  }
+  	
+  	}
+  	
+  	
+  	
+  	$("#semantic_label").remove();
+  	$("#semantic_relate").remove();
+  	$("#frame").remove();
+  	
+  	//spell, relateどうしよう
+  	$("div#semantic_modal > .modal-header").append("<h3 id ='semantic_label'>" + oldstr + "</h3>")
+  	$("div#semantic_modal > .modal-header").append("<h4 id ='semantic_relate'>前の語との関係：" + relate_caption + "</h4>")
+  	$("div#semantic_modal > .modal-body").append("<iframe src='http://kotobank.jp/word/" + str + "' id = 'frame'>")
+  	$('#semantic_modal').modal();
+  	
+  })
+  
+
+
+ $("div.word").mouseenter(function(){
+ 	
+ 	$("div.backdrop", this).css("display", "block");
+
+  }).mouseleave(function(){
+    
+    $("div.backdrop", this).css("display", "none");
+  	
+  });
+    
+
+  
+  $("form#register").submit(function(){
+  		
+      username = $("#register_name").val();
+      email = $("#register_mail").val();
+      pass = $("#register_pass").val();
+      repass = $("#register_re_pass").val();
+
+      if ((username == "") || (email == "") || (pass == "") || (repass == "")) {
+       	alert('記入していない項目があります。')
+        return false;
+      }
+      else {
+      	
+      	if(pass != repass){
+      	  alert("確認用パスワードが間違っています。")
+      	  return false;
+      	}
+      	else {	
+          return true;
+      	}
+      }
+
+  }) 
+
+  
+  $("form#login").submit(function(){
+  		
+      username = $("#login_name").val();
+      pass = $("#login_pass").val();
+      
+
+      if ((username == "") || (pass == "") ) {
+       	alert('記入していない項目があります。')
+        return false;
+      }
+      else {
+        return true;
+      }
+
+  })   
+
+  //timer = setTimeout(function(){  
+    $("div.word").each(function(i){
+  	  $(this).delay(1000*i).flip({
+  	  	  onEnd: function(){
+	  	    if(i == 4){
+	  	   	  $("span.center_data").css("color", "black");
+	  	    }
+  	      },
+  	      direction: 'tb',
+  	  	  color: "#ffffff"
+  	  })
+    })  	   
+  //}, 3000);
+  
 });
 
 function rand_draw(dataset){
@@ -156,6 +451,6 @@ function relate_draw(dataset){
   	//alert("aaa");
   	$('#myModal').modal();
   })
-
+  
 	
 }

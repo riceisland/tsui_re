@@ -1,0 +1,34 @@
+%div{:id => "words"}
+	-i=0
+	-while i < 4
+		-@content = @relate_word_list[i]
+		=haml :word_box
+		-i += 1
+	%div{:class => "word center", :id =>  @data_hash[:word_id], :title => @data_hash[:direction], :size => @data_hash[:size].to_s}
+		%p{:class => "center_data", :style => "font-size:" + @data_hash[:size].to_s + "px;"}= @data_hash[:direction]
+		%div{:class => "backdrop", :id => "backdrop_" + @data_hash[:word_id]}
+			- if @data_hash[:fav_icon]
+				%div{:class => "backdrop_fav"}
+					-if @data_hash[:fav_icon] == "icon-heart-1"
+						%span{:class =>  @data_hash[:fav_icon] + " backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";", :id => "favbd_" +  @data_hash[:word_id] }
+						%p{:class => "backdrop_content fav_msg1", :style => "line-height:" + @backdrop_height + ";", :id => "favbdmsg_" +  @data_hash[:word_id] }お気に入りを解除
+					-else
+						%span{:class =>  @data_hash[:fav_icon] + " backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";", :id => "favbd_" +  @data_hash[:word_id]}
+						%p{:class => "backdrop_content fav_msg2", :style => "line-height:" + @backdrop_height + ";", :id => "favbdmsg_" +  @data_hash[:word_id] }お気に入りに追加
+			%div{:class => "backdrop_semantic"}
+				%span{:class => "icon-book-alt2 backdrop_content", :'aria-hidden' => "true",:style => "line-height:" + @backdrop_height + ";"}
+				%p{:class => "backdrop_content semantic_msg", :style => "line-height:" + @backdrop_height + ";"}語義を見る
+			%div{:class => "backdrop_relate"}
+				%span{:class => "icon-fullscreen backdrop_content", :'aria-hidden' => "true", :style => "line-height:" + @backdrop_height + ";"}
+				%a{:href => "word?word_id=" + @data_hash[:word_id] + "&relation_id=" + @data_hash[:relation_id].to_s, :class => "backdrop_content", :style => "line-height:" + @backdrop_height + ";"}関連語を更新		
+	-i = 4
+	-while i < 8
+		-@content = @relate_word_list[i]
+		=haml :word_box	
+		-i += 1	
+%div{:id => "semantic_modal", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-lebelledby' => "myModalLabel", :'aria-hidden' => "true"}
+	%div{:class => "modal-header"}
+		%button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}x
+		- if @username
+			%span{:class => "fav_icon", :'aria-hidden' => "true"}
+	%div{:class => "modal-body"}

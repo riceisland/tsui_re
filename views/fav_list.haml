@@ -1,0 +1,26 @@
+%div
+	%h4= "Page "+ @paginated.current_page.to_s + "/" + @paginated.page_count.to_s
+	%div{:class => "fav_list"}
+		-@page_list.each do |elem|
+			%a{:href => "word?word_id=" + elem[:word_id] + "&relation_id=" + elem[:relation_id]}= elem[:direction]
+	%div{:class => "pagination"}
+		-if @paginated.prev_page
+			%ul
+				%li{:class => "active"}
+					%a{:href => "http://localhost:1234/fav_list?page=" + @paginated.prev_page.to_s}
+						%span{:class => "icon-arrow-left", :'aria-hidden' => "true" }
+		-else
+			%ul
+				%li{:class => "disabled"}
+					%a{:href => "#"}
+						%span{:class => "icon-arrow-left", :'aria-hidden' => "true" }
+		-if @paginated.next_page
+			%ul
+				%li{:class => "active"}
+					%a{:href => "http://localhost:1234/fav_list?page=" + @paginated.next_page.to_s}
+						%span{:class => "icon-arrow-right-2", :'aria-hidden' => "true" }
+		-else
+			%ul
+				%li{:class => "disabled"}
+					%a{:href => "#"}
+						%span{:class => "icon-arrow-right-2", :'aria-hidden' => "true" }

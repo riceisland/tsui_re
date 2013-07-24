@@ -1,0 +1,53 @@
+!!! XML
+!!!
+%html
+	%head
+		%title= @title
+		%meta{:"http-equiv"=>"Content-Type", :content=>"text/html", :charset=>"utf-8"}
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/bootstrap.css"} 
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/img_font_style.css"}  
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/style.css"} 
+		%link{:rel=>"stylesheet", :type=>"text/css", :href=>"./css/menu.css"}   
+		%script{:type => 'text/javascript', :src => "./js/jquery-1.8.3.min.js"}
+		%script{:type => 'text/javascript', :src => "./js/jquery.flip.js"}
+		%script{:type => 'text/javascript', :src => "./js/modernizr.custom.63321.js"}
+		%script{:type => 'text/javascript', :src => "./js/base.js"}
+	%body
+		%div{:id => "container"}
+			%h3 dictionareading!
+			%ul{:class => "nav nav-tabs", :id => "exptab"}
+				%li{:class => "nav_li"}
+					%a{:href => "#exp", :'data-toggle' => "tab"}このサイトについて
+				%li{:class => "nav_li"}
+					%a{:href => "#login", :'data-toggle' => "tab"}ログインする	
+				%li{:class => "active nav_li"}
+					%a{:href => "#register", :'data-toggle' => "tab"}ユーザ登録する
+			%div{:class => "tab-content top-tab"}
+				%div{:class => "tab-pane", :id => "exp"}	
+					%button{:class => "css_btn_class_green"}
+						%span ログインせずに使ってみる
+						%span{:class => "icon-arrow-right", :'aria-hidden' => "true" }
+				%div{:class => "tab-pane", :id => "login"}
+					%div{:id => "login"}	
+						%form{:action => "/login", :method => "POST", :class => "userform", :id => "login"}
+							%input{:type => "text", :name =>"name", :placeholder => "ユーザ名"}
+							%input{:type => "password", :name =>"password", :placeholder => "パスワード"}
+							%button{:class => "css_btn_class"}
+								%span ログイン
+								%span{:class => "icon-arrow-right", :'aria-hidden' => "true" }
+				%div{:class => "tab-pane  active", :id => "register"}
+					%div{:id => "register"}
+						%button{:class => "css_btn_alert"}
+							%span= @msg	
+						%button{:class => "css_btn_class_green"}	
+							%span ログインせずに使ってみる
+							%span{:class => "icon-arrow-right", :'aria-hidden' => "true" }
+						%hr
+						%form{:action => "/register", :method => "POST", :class => "userform", :id => "register"}
+							%input{:type => "text", :name =>"name", :placeholder => "ユーザ名"}
+							%input{:type => "text", :name =>"mail", :placeholder => "メールアドレス"}
+							%input{:type => "password", :name =>"password", :placeholder => "パスワード"}
+							%input{:type => "password", :name =>"re_password", :placeholder => "パスワード（確認）"}
+							%button{:class => "css_btn_class"}
+								%span ユーザ登録
+								%span{:class => "icon-arrow-right", :'aria-hidden' => "true"}

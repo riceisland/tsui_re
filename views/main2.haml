@@ -1,0 +1,11 @@
+%div
+	-@word_list.each do |elem|
+		-@content = elem
+		=haml :word_box
+%div{:id => "semantic_modal", :class => "modal hide fade", :tabindex => "-1", :role => "dialog", :'aria-lebelledby' => "myModalLabel", :'aria-hidden' => "true"}
+	%div{:class => "modal-header"}
+		%button{:type => "button", :class => "close", :'data-dismiss' => "modal", :'aria-hidden' => "true"}x
+		- if @username
+			%span{:class => "fav_icon", :'aria-hidden' => "true"}
+	%div{:class => "modal-body"}
+		

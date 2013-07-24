@@ -8,8 +8,9 @@ Sequel.connect("sqlite://user.db")
 class User < Sequel::Model
   unless table_exists?
     set_schema do
-	  primary_key :id
+	  primary_key :user_id
 	  varchar :name
+	  varchar :mail
 	  varchar :password
 	end
 	create_table
@@ -24,6 +25,7 @@ class User < Sequel::Model
   
 end
 
+      
 #word_id:レコードid
 #direction:見出し語
 #spell:読み
@@ -82,6 +84,18 @@ class Wisdom < Sequel::Model
       primary_key :id
       varchar :wisdom
       varchar :creator
+    end
+    create_table
+  end
+end
+
+class Favs < Sequel::Model
+  unless table_exists?
+    set_schema do
+      primary_key :id
+      foreign_key :user_id, :users
+      varchar :word_id
+      varchar :time
     end
     create_table
   end
