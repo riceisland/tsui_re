@@ -16,15 +16,6 @@ set :port, 1234
 # Sinatra のセッションを有効にする
 enable :sessions
 
-#sequel使えるようにする
-#Sequel::Model.plugin(:schema)
-#Sequel.extension :pagination
-#Sequel.connect("sqlite://user.db")
-
-#configure do
-#  use Rack::Session::Cookie, :secret => Digest::SHA1.hexdigest(rand.to_s)
-#end
-
 helpers do
 	include Rack::Utils
 	alias_method :h, :escape_html
