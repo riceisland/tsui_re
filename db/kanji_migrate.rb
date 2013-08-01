@@ -1,12 +1,13 @@
 # encoding: utf-8
 
 require "sequel"
-require "./model.rb"
+require "../model.rb"
 
 #sequel使えるようにする
 Sequel::Model.plugin(:schema)
 Sequel.extension :pagination
-Sequel.connect("sqlite://user.db")
+Sequel.connect("mysql://yonejima:redbook6@localhost/tsui", {:compress => false, :encoding => "utf8"})
+
 
 #spellを重複を除いて取り出す
 dataset = Word.group(:direction).having('count(direction) > 0').select_group(:direction).all;

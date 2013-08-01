@@ -4,7 +4,7 @@ require "./model.rb"
 #sequel使えるようにする
 Sequel::Model.plugin(:schema)
 Sequel.extension :pagination
-Sequel.connect("sqlite://user.db")
+Sequel.connect("mysql://yonejima:redbook6@localhost/tsui", {:compress => false, :encoding => "utf8"})
 
 #spellを重複を除いて取り出す
 dataset = Word.group(:spell).having('count(spell) > 0').select_group(:spell).all;

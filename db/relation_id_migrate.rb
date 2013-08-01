@@ -4,9 +4,9 @@ require "./model.rb"
 #sequel使えるようにする
 Sequel::Model.plugin(:schema)
 Sequel.extension :pagination
-Sequel.connect("sqlite://user.db")
+Sequel.connect("mysql://yonejima:redbook6@localhost/tsui", {:compress => false, :encoding => "utf8"})
 
-filename = "relation_code.txt"
+filename = "./relation_code.txt"
 
 file = open(filename)
 

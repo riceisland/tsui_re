@@ -1,12 +1,12 @@
 require "sequel"
-require "./model.rb"
+require "../model.rb"
 
 #sequel使えるようにする
 Sequel::Model.plugin(:schema)
 Sequel.extension :pagination
-Sequel.connect("sqlite://user.db")
+Sequel.connect("mysql://yonejima:redbook6@localhost/tsui", {:compress => false, :encoding => "utf8"})
 
-filename = "antonym.txt"
+filename = "./source/antonym.txt"
 
 file = open(filename)
 

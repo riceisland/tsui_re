@@ -4,6 +4,7 @@ require "sequel"
 Sequel::Model.plugin(:schema)
 Sequel.extension :pagination
 Sequel.connect("sqlite://user.db")
+#Sequel.connect("mysql://yonejima:redbook6@localhost/tsui", {:compress => false, :encoding => "utf8"})
 
 class User < Sequel::Model
   unless table_exists?

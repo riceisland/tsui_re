@@ -274,26 +274,25 @@ get "/word" do
 	  len = str.length
 	  
 	  if len < 5
-	    size = 90
+	    main_size = 90
 	  elsif len < 7
-	    size = 61
+	    main_size = 61
 	  elsif len < 10
-	    size = 60
+	    main_size = 60
 	  elsif len < 13
-	    size = 45
+	    main_size = 45
 	  elsif len < 17
-	    size = 44
+	    main_size = 44
 	  elsif len < 21
-	    size = 36
+	    main_size = 36
 	  elsif len < 26
-	    size = 35
+	    main_size = 35
 	  else
-	    size = 30
+	    main_size = 30
 	  end
-	  
+
 	  related_w = related_set.relation_name
-	
-	  
+	 
 	  query = "%" + word_id + "%"
 	  relation_set =  Relation.grep(:word_set, query).all
 	  
@@ -450,7 +449,7 @@ get "/word" do
 	  @data_hash[:relation_id] = related
 	  @data_hash[:related_w] = related_w
 	  @data_hash[:word_id] = word_id
-	  @data_hash[:size] = size
+	  @data_hash[:size] = main_size
 	  
 	  if request.env["warden"].user.nil?
 	

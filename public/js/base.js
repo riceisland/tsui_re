@@ -218,7 +218,7 @@ $(document).ready(function(){
   	}
   	
   	
-  	if ($("span.fav_icon") != null){
+  	if (!$("span.fav_icon")){
   	  
   	  default_classes = $(bd_id).attr("class");
   	  default_class = default_classes.split(" ")[0]
